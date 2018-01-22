@@ -1,0 +1,9 @@
+Jan 13 2018 16:42:13 TRUTH parameter_checks.rb: No Args supplied
+Jan 13 2018 16:45:45 TRUTH parameter_checks.rb: Need 2 Args - Exiting
+Jan 13 2018 16:45:51 TRUTH parameter_checks.rb: No Args supplied
+Jan 13 2018 16:47:01 TRUTH parameter_checks.rb: z IS NOT A DIGIT - EXITING
+Jan 13 2018 16:48:21 TRUTH parameter_checks.rb: z IS NOT A DIGIT - EXITING
+Jan 13 2018 16:48:25 TRUTH parameter_checks.rb: 4 Must be a word character ([a-zA-Z_]) - EXITING
+Jan 13 2018 16:51:15 TRUTH parameter_checks.rb: 4 is not a word character ([a-zA-Z_]) - EXITING
+Jan 13 2018 16:51:30 TRUTH parameter_checks.rb: 3
+Jan 13 2018 16:51:30 TRUTH parameter_checks.rb: b
