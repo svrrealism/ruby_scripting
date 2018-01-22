@@ -1,0 +1,462 @@
+1). Ruby Language
+
+Features:
+1. Object Oriented (OO) Language
+  a. Everything is an object - i.e. PowerShell, Python
+  b. Vars are references to objects
+2. Dynamically-Type Vars
+3. Basic Types (implicit) of Vars
+  a. Strings
+  b. Numbers (Fixnum|Bignum)
+  c. Arrays
+  d. Hashes (Dictionaries | Key => Value Pairs)
+  e. Ranges [0..9] | [0...9]
+4. Interpretive Language - Compilation | Re-compilation is superfluous: i.e. Python, Perl, etc.
+Note: This expedites the delivery of code | projects | etc. performed in Ruby
+5. Simple | Elegant syntax - i.e. 10.times { print "Something ten times\n" }
+6. Text-Processing machine - i.e. Perl | Python
+7. Supports: Begin {<expression[s]>} && End {<expression[s]>} - i.e. behaves like awk - pre and post execution control
+8. Regular Expressions Support - POSIX | Perl
+9. Available across Linux, UNIX, Win 32|64 platforms, etc.
+10. Interactive CLI via irb (*Nix) fxri (Windows) assists in learning the language
+  a. Includes integrate CALC - i.e. Python
+11. Variables are defined in a number of ways:
+  a. '$' prefix : i.e. $fname = "Hello" - Global Var
+  b. SANS the prefix char i.e. fname = "Hello" - local Var - available only throughout the script
+  c. '@' prefix : i.e. @fname = "Hello" - Instance Var of a method - localizes the var to the METHOD inside the class
+  d. '@@' prefix i.e. @@fname = "Hello" - Class attribute - localizes Var to the class and or method(s) within the class
+
+Note:   Vars begin with lowercase letters and may include: '_', '[a-zA-Z]' - Global & Local Vars
+Note:   Vars that begin with UPPERCASE are CONSTANTS: i.e. Fname = 'Hello' - Constants are not intended to be changed
+Note: Class Definitions ALSO begin with UPPERCASE: i.e. 'class CaseConversion'
+Note: Methods SHOULD begin with lowercase letters: i.e. 'def nowTime\n print "..."\n end'
+
+12. Command substitution via backticks: i.e. `ls -l` returns output of ls -l to Var 'contents'
+13. CPAN-like Package Manager: 'RubyGems' - Facilitates extension Ruby build
+14. 'rdoc' - Documentation - i.e. 'perldoc' ALSO: ruby-doc.org, ruby-lang.org (main website)
+Note: 'irb' interactive interface is intuitive
+15. 'irb' supports tab-completion: i.e. 'BASH' $SHELL
+16. Iterations are easy: i.e. 'list.each do | VAR | <statements[s]> end' || 'list.each {|VAR|<statement[s]>}'
+17. Check syntax with: 'ruby -c SCRIPT'
+18. Boolean Support:
+  a. 'nil' & 'false' are FALSE
+  b. ALL ELSE evaluates to True
+  Note: This impacts how '0' is interpreted: i.e. EXIT-STATUS of CLI
+
+19. 'puts' replaces 'print' and auto-includes '\n' - 'print' does NOT auto-include '\n'
+20. '+' - Concatenates: i.e. 'full_name = "Linux" + "CBT"'
+Note: Space-delimited strings are auto-concatenated: print "Lin" "ux" - Result: 'Linux'
+21. Semicolons at the end of each line are unnecessary
+22. '$_' - Default line of input - Created by 'gets' function - Referenced if variable is omitted
+23. '__END__' - If detected in a script, causes Ruby to end processing at that line
+24. 'require "English" (required module for $ARGV) - '$*' (Alias to $ARGV) - list (ARRAY) of CLI ARGS (Positional Parameters)
+25. '#' - Single line comments
+26. '\' - Escape character - continues lines if present at the end of the line
+27. 0..9 (Inclusive range of ALL values), '0...9' (Exclusive of upper value of range)
+28. '#{<expression[s]>}' - Ruby Expressions - CAN be included in strings
+  i.e. print "#{'HELLO'*3} World\n" - prints "HELLO HELLO HELLO World\n"
+
+2). Installing Ruby and String usage
+
+Feaures:
+  a. Go to Ruby-lang.org for installation
+    Gotcha: Tab completion is disabled by default.
+    To enable tab completion:
+      1). Create an ~/.irbrc file and paste into it: require 'irb/completion'
+
+  b. 'fname.capitalize' - renders first char as uppercase
+  c. 'fname.upcase' - All characters are rendered as upcase.
+
+        Methods that end with '!' changes the variable in place
+        i.e. 'fname.upcase!' - updates the var fname
+        Alternative method - 'fname = fname.upcase'
+
+  d. 'fname.class' - returns the standard type of the VAR.
+  e. 'fname.empty?' - returns the value True or False
+  f. 'puts fname' - prints the contents of fname with a trailing newline character || 'print fname' -  prints all on one line
+  g. 'fname = "  Linux  " ' && 'fname.[lr].strip' - removes leading | trailing | both | whitespace
+  h. 'fname = "  \tLinux\t  "' - Repeat the above for clean up of these tabs
+  i. 'fname = "  \tLinux\t  \n"' - 'fname.chomp' - removes the trailing newline character but preserves the tabs.
+          'fname.strip' - removes all the whitespace and the trailing newline character.
+         - So it's common to see 'fname.strip.chomp!' (strips the newlines and changes the var in place)
+  j.'fname.slice(0,3)' - renders up to but not including the character at position 3 (like [:3] in python)
+    j1). 'fname.slice(-3..-1)' - inclusive slice of all characters in the range (it's backward in this example here)
+    j2). 'fname.slice(0..3)' will print 'Linu'
+  k. 'fname.split(PATTERN (Default is blank or whitespace))'
+    k1). 'fname.split' can also be called like 'fname.split()' which by default (the white space mentioned above)
+          will return an array with the contents of the Variable, in this case: ["Linux"]
+    k2). 'fname.split(/ /)' - this will split characters that are next to each other sans spaces and return ["Linux"]
+                            In the case of fname = "CBT Linux" it will return ["CBT", "Linux"]
+    k3). 'fname.split(',')' - 'fname = "L,I,N,U,X" ' will return the array  => ["L", "I", "N", "U", "X"]
+
+  l. 'prodAge = "9"' sets the value as a string
+  m. 'prodAge = 9' sets the value as an Integer(Fixnum, Bignum)
+  n. 'prodAge = prodAge.to_i' - converts if possible to an 'Integer'
+  o. 'prodAge = prodAge.to_s' - converts if possible to a 'String'
+
+3). ARRAYS
+Features:
+ 1). Lists
+ 2). May contain lists of lists
+ 3). Auto-Indexed by Ruby with values starting at 0 (i.e. [0..N])
+
+ Tasks
+ 1). Explore Arrays
+  a. 'products = ["BASH", "WinPerl", "WinPHP", "WinPython", "WinAwk-Sed", "PowerShell", "Ruby"]'
+  b. 'products.length' - returns absolute number of items in the ARRAY
+  Note: It does NOT return the upper bound i.e. 6 which would be the 7th item's position
+  c. products[0..3] this returns items that are inclusive to the upper bound item, with 3 DOTS it excludes the last bound
+  d. 'products[-4..-1]' || products[-4] - prints subset and specific items, respectively
+  e. 'products2 = %w{BASH WinPerl WinPHP WinPython WinAwk-Sed PowerShell Ruby}' this is another way to create an array
+  Note: products and products2 have 2 different addresses in memory
+  f. 'products.object_id'
+  Note: Every object has a unique id
+  Note: If 2 objects share the same id, they are really one object (vars that point to the same address in memory)
+  Note: .clone() method copies the contents. Can set this equal to a var with the same contents, memory address is different.
+  g. products.sort - sorts results alphanumerically
+  h. 'products.join ":" ' - joins bases on the whitespace char
+  i. 'products.join ":" ' - joins bases on the colon char
+  j. 'products.push "Tcl"' - appends "Tcl" to the end of the array
+  k. 'products.pop' - removes the last item in the ARRAY
+  l. 'products.shift' - removes the first item in the array
+  m. 'products.unshift "ARG"' - unshifts the array for you to add in a specified argument
+  n. 'products.uniq!' - pairs list to unique values and updates the array
+     ex). say you have ["BASH", "BASH", "WinPerl", "WinPHP", "WinPython", "WinAwk-Sed", "PowerShell", "Ruby"]
+     if you run products.uniq! it will return the array with just one 'BASH' in it
+  o. Define multidimensional array
+    o1. 'scriptingII = products ' - aliases array products
+    o2. 'security = ["Basic", "Proxy", "Firewall", "SELinux", "SnortNIDS", "Packet Capture Analysis", "PAM", "OpenSSHv2", "OpenPGP",
+    "SFTP", "BPF"] '
+    o3. 'products_complete = [scriptingII, security]'
+      products_complete[0][0] to access first element of scriptingII
+
+ 2. Hashes - Key => Value pairs
+   a. 'prodVers = {'Bash' => '4x', 'WinPerl' => '5x', 'WinPython' => '2x'}'
+
+Note: The main difference between Arrays and Hashes is that:
+a. Arrays store values with numerical indexes, 0 or greater
+b. Hashes store values with arbitrarily named keys
+
+   b. prodVers.keys dumps the keys of hash
+   c. prodVers.values dumps the values of the hash
+   d. prodVers.sort sorts the hash based on the key names (alpha)
+
+Note: Hash keys are unique but the values need not be.
+
+### Class Definition ###
+
+Features:
+ 1. Compartmentalization of capabilities carried out via classes. For example: Strings have certain methods.
+ 2. Basis of objects and the subsequent instantiation of them.
+ 3. By convention,Class names begin with UPPERCASE chars [A-Z]
+ 4. Within a class there is a special method, ruby method for every class which accepts params when 'new' is called. It is called, 'initialize'
+    (New is a method referencing initialize) to create object
+5. By default all Classes are children of 'objects' superclass, unless otherwise specified
+Note: This ensures a base-level of functionality
+6. Subclass is a derivation of high order class or superclass: i.e. 'class ChangeCaseExtra < ChangeCase'...
+Note: Use 'super' within subclass to access methods of the super-class
+7. OO environments are hierarchical in nature
+8. Ruby comes with a number of base classes, i.e. strings, iterations, numbers, ARRAYS, Hashes, network access, File I/O
+
+Tasks:
+
+1. Create a simple class that uses pre-defined methods from the string class
+
+'
+class changeCase
+  def initialize(var1 = "UNKNOWN")
+    #Retrieve external var1 and set to instance @var1 (declares a local instance of var1)
+    @var1 = var1
+  end
+
+  #METHOD to UPPERCASE VARs
+  #This will not receive information exogenously
+  def upper
+    # In-place update of @var1
+    @var1.upcase!
+    # Dump to STDOUT contents of @var1
+    puts @var1
+  end
+  # Method to lowercase
+  def lower
+    # In-place update of @var1
+    @var1.downcase!
+    # Dump to STDOUT contents of @var1
+    puts @var1
+  end
+  #Method to swapcase
+  def swapcase
+    # In-place update of @var1
+    @var1.swapcase!
+    # Dump to STDOUT contents of @var1
+    puts @var1
+  end
+end
+
+#instantiate class ChangeCase
+
+cc.upper
+cc.lower
+cc.swapcase
+
+'
+2. Instantiate class 'ChangeCase'
+ a. 'cc' = ChangeCase.new - constructs new instance of class ChangeCase, rendering an object, but it does not include the variable var1 yet
+ b. 'cc.var1 = "LinuxCBT" - Supplies Var1 to initialized class(object) - Requires workaround by passing a value at the .new(something) stage'
+
+3. Extend class with more functionality
+  a. Ensure extra methods
+  b. Ensure data is stripped
+
+### Iteration ###
+Features:
+1. Lists (enumerable types) have automatic 'each*' method for iteration
+2. This simplifies iteration, often obviating the need for 'for' loops
+3. 'until' - negated 'while' loop: i.e. 'until count > 10 {...}'
+4. 'Break, Redo, and Next' - supports intra-loop routing - follow each with: 'if condition'
+i.e. 'break if /^$/' - skips loop if line is empty
+
+Tasks:
+1. Evaluate Integer Loops
+ Note: numbers inherently iterate
+'num = 1'
+'15.times do'
+  'print num.class, " ", num, "\n"'
+   num *= 10
+'end'
+
+### Conditions ###
+Features:
+  1. Branching based on boolean tests
+  2. '{}' are NOT used
+  3. Note: use 'then', if conditional check is ALL on 1-line: i.e. 'if defined?' products then <statement[s]> end
+  4. If conditions span multiple lines, then the 'then' statement is superfluous
+  5. 'unless' - negated 'if'
+  6. Supports statement modifiers: i.e. 'prod_length = products.length if products.length > 0'
+
+  Typical Syntax:
+  'if condition
+    <statement[s]>
+  elsif condition
+    <statement[s]>
+  else
+    <statement[s]>
+  end'
+  7. standard operators are supported: '==', '<=', '<', '>', '>=', etc.
+  8. Logical ANDing and ORing: '&& | AND', '|| | OR'
+  9. Exclamation mark negates traditional checks (or use unless which performs a negated check by default on a given variable)
+  10. Regex can be used in a conditional check as they return booleans
+  11. Methods that terminate with: '?' mark, typically return boolean that can be used in conditional checks
+
+Tasks:
+1. Check if some var is empty
+  # Vars can be defined but not contain anything. variables may be defined for later assignation or later population
+  'if !products.empty?
+    puts "FULL"
+   else
+     puts "EMPTY"
+  end'
+
+2. Conditions within a loop
+
+Note: Ruby supports tradition 'if', 'then', 'elsif', 'else' blocks
+Note: Ruby ALSO supports 'unless', negated 'if'
+Note: Ruby ALSO supports 'case & when' statements
+
+
+### RegEx Handling ###
+Features:
+ 1. Match characters based on literal and metacharacters
+ 2. Invocation are instantiations of 'Regexp' Class
+ 3. Supports Perl | Python Regexes
+ 4. '/REGEX/[options]' - typical invocation
+ 5. '%r{ REGEX } - Alternative invocation'
+ 6. 're = Regexp.new( PATTERN [, options])'
+
+
+ Tasks:
+  1. Discuss supported metacharacters
+   a. '*' - 0 or more
+   b. '+' - 1 or more
+   c. '.' - all chars on a line and save the '\n'
+   d. '?' - 0 or 1 times
+   e. '^'(circumflex/caret symbol) will match the beginning of string/line
+   f. '$' - matched the end of a line
+   g. '{lower[,upper]}' - i.e. L{3} -> Looks for 3 L's, L{3,} -> Matches any number of L's , L{3,6} -> matches at least 3 and up to 6 L's
+   h. '[a-zA-Z0-9]' - character class - i.e. Linu[sx]
+   i. '\d' - matches digits
+   j. '\D' - matches NON-digits
+   k. '\s' - matches whitespaces
+   l. '\S' - matches NON-whitespaces
+   m. '\w' - matches word boundaries including: [a-zA-Z0-9_]
+   n. '\W' - matches NON-word boundaries i.e. everything but [a-zA-Z0-9_]
+   o. '\z' - matches the end of a string
+   p. '\Z' - matches the end of a string save '\n'
+   q. '\A' - matches the beginning of a string
+   r. '=~' - positive match - i.e. '/\w+/ =~ fname'
+   s. '!~' - negative match with the above example " "
+
+2. Simple Regex Usage
+  a. 're = /\d+/' - one or more digits
+  b. num = "9" creates a string
+  c. re =~ num - returns offset of the match
+Note: Remember that in Ruby, an error is returned as: 'false' || 'nil' - ALL else is true (if the value 0 is returned)
+  d. if re =~ num then print "YES we have a match" end
+
+3. More Examples
+  a. string.gsub()
+    a. 'fname = 'Linux' '
+    b. 'fname.gsub(/ux/, 'OS') - this replaces ux with os'
+
+  b. Split sample line with regex
+    b1. 'line1 = "This is a test"'
+    b2. 'line1.chomp.split' - Tokenizes fields based on whitespace
+  Note: Strings will return 'each' method, however, the string is like an array with a single element...the string itself
+    b3. 'line2 = "This|is|a|Test"'
+    b4. 'line2.chomp.split(/\|/)' => ["This", "is", "a", "Test"]
+    b5. Since the above is an array, you can flatten the array into a string by:
+        line2 = ["This", "is", "a", "Test"]    => ["This", "is", "a", "Test"]
+        line2 = line2.join "|"                 => "This|is|a|Test"
+
+
+    With Regex we use it to split, substitute text in strings (perhaps if we are looping through content)
+    For example:
+      => Could be starting from a single string,
+      => Turn it into an array
+      => Loop through it
+      => Transform the text
+      => Reconstruct the original string
+      => Press it to a file
+
+### File IO ###
+Features:
+ 1. Handled via Classes: 'IO', 'File', 'Dir'
+ 2. Handles text files by default with most methods: i.e. each line of a text file becomes an ARRAY
+
+Tasks:
+ 1. List Directory contents
+  a. 'Dir.glob "*"' - returns an array of items in the current directory
+  b. 'Dir.glob "*" do |_| puts _ end' || 'Dir.glob "*" { |_| puts _ }'
+  c. 'Dir.glob "*" { |d| cfile = File.open(d); cfile.atime } '
+
+ 2. Open Files
+  a. 'f0 = 'G8 Leaders' ' - var for filename
+  b. 'f1 = File.open(f0, "r")' - opens the file at the beginning in 'READ' mode
+  c. 'f1.each do |_| puts _' - dumps each line of the file - reads one line of input at a time into the current ARRAY.
+
+Note: Once a file has been read and enumerated to STDOUT or to some other destination, the file pointer will be at: EOF (End of file)
+Note: After having read a file, use: 'close()' method to terminate handle
+Note: '/^$/' RegEx means empty line
+  d. 'while f1.gets
+         puts $_
+      end '
+  e. 'f1.gets' - returns  one line per invocation
+
+3. Read G8_Leaders - Rearrange presentation of the fields
+
+4. Read 'G8_Leaders' into a Hash - Set key => 'country' and value => rest_of_line
+
+5. Driving Mass Copy|Move Processes by criteria
+Methods: 'Copy' (require ftools(1.8x)|FileUtils(1.9x)) & 'Rename'
+
+6. Retrofit Mass Copy | Move Process to Normalize process
+Note: Sometimes the character classes used in various methods: i.e. 'split' will process incorrectly.
+      Sometimes you have to shuffle the regexes
+
+
+
+### Create logger() Class ###
+Features:
+ 1. Re-usuable Class by anyone access to it across systems
+
+Tasks:
+ 1. Write Logger Class
+  a. Get basic logger working
+  b. Incorporate hostname
+  c. Set time to mimic nix
+  d. Include log option to file
+
+ 2. Incorporate class from new scripts
+  a. 'require "NowTime" '
+Note: Classes can be included in a variety of ways
+ 1. Place the class in the library (site_rub/*) directory - check '$:' in 'irb'
+
+      ex). When I checking in irb on Mac, running the command
+
+      $:.each{|x| puts x}
+
+          /Users/deron/.rvm/gems/ruby-2.4.1@global/gems/did_you_mean-1.1.0/lib
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/site_ruby/2.4.0
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/site_ruby/2.4.0/x86_64-darwin15
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/site_ruby
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/vendor_ruby/2.4.0
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/vendor_ruby/2.4.0/x86_64-darwin15
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/vendor_ruby
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/x86_64-darwin15
+
+          =>
+
+          ["/Users/deron/.rvm/gems/ruby-2.4.1@global/gems/did_you_mean-1.1.0/lib", "/Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/site_ruby/2.4.0", "/Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/site_ruby/2.4.0/x86_64-darwin15", "/Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/site_ruby", "/Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/vendor_ruby/2.4.0", "/Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/vendor_ruby/2.4.0/x86_64-darwin15", "/Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/vendor_ruby", "/Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0", "/Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/x86_64-darwin15"]
+
+
+      THEN I GOT CREATIVE:
+
+      $:.each {|x| puts x if x =~ /site_/}
+
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/site_ruby/2.4.0
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/site_ruby/2.4.0/x86_64-darwin15
+          /Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/site_ruby
+
+ 2. On Nic, '$:' include '.' (Current Directory) - Ruby will find the class in current directory of the script
+ 3. Specify the full path of the library: i.e 'require "/Users/deron/.rvm/rubies/ruby-2.4.1/lib/ruby/site_ruby/2.4.0" '
+
+
+
+
+ ### Exception Handling ###
+Features:
+ 1. Gracefully handles errors via:
+  a. 'begin'
+  b. 'rescue'
+  c. '[ensure]' - ensures that code executes regardless of exception
+  d. 'end'
+  blocks
+
+ 2. Multiple rescue statements can be used to trap various errors
+
+ 3. Default exception: 'StandardError' - top level class
+  a. Errors derive from this class
+  b. This is what you see on STDOUT when something is awry
+
+Note: 'StandardError' is fine for many exceptions, however, it does not allow greater granularity
+Note: Consults docs for error classes to see which errors are triggered for which cases
+
+ 4. Errors are stored in: '$!' variable i.e. like in Perl
+  a. Note: Errors can be redirected to a differently named var: i.e. 'rescue StandardError => err1'
+ 5. Ensure blocks run regardless of whether exception was raised: i.e. 'File not found'
+ 6. Common Errors: 'StandardError', 'SyntaxError', 'NameError', 'SystemCallError'
+ 7. 'raise' can be used within the rescue block to re-raise and exception for additional handling
+Note: Traditional exception handling is based on response code: i.e. '$? = 0' (Good), '$? != 0' (Bad)
+Note: This method provides 1 opportunity to address matters, sans the chance to re-raise the same error because
+      the error VAR '$?' is constantly updated as your process moves along
+
+Tasks:
+ 1. Retrofit existing classes
+
+
+
+
+
+### Parameter Checks ###
+Features:
+ 1. Validate Input
+ 2. Relies upon regexes
+ 3. Requires 'English' module to parse arguments on the command line
+ 4. Regex features allow you to dictate the quality of inputs to avoid exploits and code injections
+
+Tasks:
+ 1. Dump ALL CLI ARGS
+Note: In Ruby 'include' references pre-defined modules (remember the ruby module file we created for Puppet Parser in CHUCK?)
+Note: Use 'require' to include the contents of another Ruby file
+Note: Consider doing checks in the: 'begin' block
